@@ -34,7 +34,7 @@ public class KafkaMessagePublisherService {
                 if (ex == null) {
                     System.out.println("Send Message -> " + customer.toString() + " Offset-> " + result.getRecordMetadata().offset());
                 } else {
-                    System.out.println("Unaable to send message " );
+                    System.out.println("Unaable to send message " ex.getMessage() );
                     ex.printStackTrace();
                 }
             });
