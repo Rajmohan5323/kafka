@@ -6,8 +6,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 @Service
-public class KafkaMessageListenner {
-    Logger log = LoggerFactory.getLogger(KafkaMessageListenner.class);
+public class KafkaMessageListener {
+    Logger log = LoggerFactory.getLogger(KafkaMessageListener.class);
 
     @KafkaListener(topics = "springboot-topic1" ,groupId = "cm-group1")
     public void consumer1(String message) {
@@ -28,6 +28,5 @@ public class KafkaMessageListenner {
     public void consumer4(String message) {
         log.info("consumer4 consume the message {}",message);
     }
-
 
 }

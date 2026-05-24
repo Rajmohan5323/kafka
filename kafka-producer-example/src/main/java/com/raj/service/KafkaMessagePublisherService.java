@@ -1,5 +1,6 @@
 package com.raj.service;
 
+import com.raj.dto.Customer;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,20 @@ public class KafkaMessagePublisherService {
       });
     }
 
-
-
+    public void sendEventsToTopic(Customer customer) {
+        try {
+            CompletableFuture<SendResult<String, Object>> future = kafkaTemplate.send("springboot-events-demo", customer);
+            future.whenComplete((result, ex) -> {
+                if (ex == null) {
+                    System.out.println("Send Message -> " + customer.toString() + " Offset-> " + result.getRecordMetadata().offset());
+                } else {
+                    System.out.println("Unaable to send message " );
+                    ex.printStackTrace();
+                }
+            });
+        }catch (Exception e){
+            System.out.println("Unable to send message "+e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }

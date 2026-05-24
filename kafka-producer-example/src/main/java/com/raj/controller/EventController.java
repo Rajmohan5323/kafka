@@ -1,17 +1,16 @@
 package com.raj.controller;
 
 
+
+import com.raj.dto.Customer;
 import com.raj.service.KafkaMessagePublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/publish")
+@RequestMapping("/producer-app")
 public class EventController {
     @Autowired
     private KafkaMessagePublisherService kafkaMessagePublisherService;
@@ -26,5 +25,16 @@ public class EventController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
+    }
+
+ /*   @PostMapping("/publish")
+    public void sentEvents(@RequestBody Customer customer){
+        kafkaMessagePublisherService.sendEventsToTopic(customer);
+    }*/
+
+    @PostMapping("/publish")
+    public ResponseEntity<String> sentEvents(@RequestBody Customer customer){
+        kafkaMessagePublisherService.sendEventsToTopic(customer);
+        return ResponseEntity.ok("Event published");
     }
 }
