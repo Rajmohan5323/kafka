@@ -29,7 +29,7 @@ public class KafkaMessagePublisherService {
 
     public void sendEventsToTopic(Customer customer) {
         try {
-            CompletableFuture<SendResult<String, Object>> future = kafkaTemplate.send("springboot-events-demo", customer);
+            CompletableFuture<SendResult<String, Object>> future = kafkaTemplate.send("springboot-events-demo", 2,null, customer);
             future.whenComplete((result, ex) -> {
                 if (ex == null) {
                     System.out.println("Send Message -> " + customer.toString() + " Offset-> " + result.getRecordMetadata().offset());

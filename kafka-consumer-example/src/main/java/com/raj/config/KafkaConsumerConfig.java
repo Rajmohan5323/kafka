@@ -1,3 +1,4 @@
+/*
 package com.raj.config;
 
 
@@ -24,8 +25,8 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         props.put(ConsumerConfig.GROUP_ID_CONFIG,"event-group");
-       // props.put(JsonDeserializer.TRUSTED_PACKAGES,"com.raj.dto");
-        props.put("spring.json.trusted.packages", "com.raj.dto");
+        props.put(JsonDeserializer.TRUSTED_PACKAGES,"com.raj.dto");
+      //  props.put("spring.json.trusted.packages", "com.raj.dto");
         return props;
     }
 
@@ -41,3 +42,4 @@ public class KafkaConsumerConfig {
         return factory;
     }
 }
+*/
